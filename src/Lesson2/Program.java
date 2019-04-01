@@ -1,8 +1,50 @@
 package Lesson2;
 
+import java.util.Random;
+
 public class Program {
+    private static Random rnd = new Random();
+    private static int N = 10000;
+    private static int a = 0;
+    private static int b = 100;
+    private static int M = 20;
+    private static MyArrayList<Integer> list;
+
+    private static void newList(){
+        int rndNum;
+        list = new MyArrayList<>();
+        for (int i = 0; i < N; i++) {
+            rndNum = a + rnd.nextInt(b);
+            list.add(rndNum);
+        }
+    };
+
     public static void main(String[] args) {
-        MyArrayList<Character> list = new MyArrayList<>();
+        long timeAlg1;
+        long timeAlg2;
+        long timeInsert = 0;
+        long timeSelect = 0;
+
+        System.out.println("№  Вставка   Выбор");
+        for (int i = 0; i < M; i++) {
+            System.out.print(i+"     ");
+            newList();
+            timeAlg1 = System.currentTimeMillis();
+            list.insertionSort(Integer::compareTo);
+            timeAlg2 = System.currentTimeMillis();
+            timeInsert += timeAlg2 - timeAlg1;
+            System.out.print(timeAlg2 - timeAlg1 + "     ");
+
+            newList();
+            timeAlg1 = System.currentTimeMillis();
+            list.selectionSort(Integer::compareTo);
+            timeAlg2 = System.currentTimeMillis();
+            timeSelect += timeAlg2 - timeAlg1;
+            System.out.println(timeAlg2 - timeAlg1);
+        }
+        System.out.println("среднее: " + timeInsert / M + "    " + timeSelect / M);
+
+        /*MyArrayList<Character> list = new MyArrayList<>();
         list.add('a');
         list.add('d');
         list.add('x');
@@ -16,6 +58,6 @@ public class Program {
         list.add('t');
         System.out.println(list);
         list.insertionSort(Character::compareTo);
-        System.out.println(list);
+        System.out.println(list);*/
     }
 }

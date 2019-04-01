@@ -30,7 +30,7 @@ public class MyArrayList<Item> /*implements Iterable<Item>*/ {
     }
 
     public void add(Item item) {
-        if (size <= list.length) {
+        if (size == list.length) {
             resize(2 * list.length);
         }
         list[size] = item;
