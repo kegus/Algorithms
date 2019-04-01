@@ -145,4 +145,14 @@ public class MyArrayList<Item> /*implements Iterable<Item>*/ {
             }
         }
     }
+    public void sortBubble(Comparator<Item> cmp){
+        //int out, in;
+        for (int i = size - 1; i >= 1; i--) {
+            for(int j = 0; j < i; j++) {
+                if (less((Item)list[j+1], (Item)list[j], cmp)) {
+                    exch(j, j + 1);
+                }
+            }
+        }
+    }
 }

@@ -7,7 +7,7 @@ public class Program {
     private static int N = 10000;
     private static int a = 0;
     private static int b = 100;
-    private static int M = 20;
+    private static int M = 10;
     private static MyArrayList<Integer> list;
 
     private static void newList(){
@@ -24,10 +24,11 @@ public class Program {
         long timeAlg2;
         long timeInsert = 0;
         long timeSelect = 0;
+        long timeBubble = 0;
 
-        System.out.println("№  Вставка   Выбор");
+        System.out.println("№  Вставка   Выбор  Пузырёк");
         for (int i = 0; i < M; i++) {
-            System.out.print(i+"     ");
+            System.out.print((i+1)+"     ");
             newList();
             timeAlg1 = System.currentTimeMillis();
             list.insertionSort(Integer::compareTo);
@@ -40,9 +41,16 @@ public class Program {
             list.selectionSort(Integer::compareTo);
             timeAlg2 = System.currentTimeMillis();
             timeSelect += timeAlg2 - timeAlg1;
+            System.out.print(timeAlg2 - timeAlg1 + "     ");
+
+            newList();
+            timeAlg1 = System.currentTimeMillis();
+            list.sortBubble(Integer::compareTo);
+            timeAlg2 = System.currentTimeMillis();
+            timeBubble += timeAlg2 - timeAlg1;
             System.out.println(timeAlg2 - timeAlg1);
         }
-        System.out.println("среднее: " + timeInsert / M + "    " + timeSelect / M);
+        System.out.println("среднее: " + timeInsert / M + "    " + timeSelect / M + "    " + timeBubble / M);
 
         /*MyArrayList<Character> list = new MyArrayList<>();
         list.add('a');
