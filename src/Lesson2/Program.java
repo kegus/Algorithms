@@ -6,9 +6,10 @@ public class Program {
     private static Random rnd = new Random();
     private static int N = 10000;
     private static int a = 0;
-    private static int b = 100;
+    private static int b = 200;
     private static int M = 10;
     private static MyArrayList<Integer> list;
+    private static MyArrayList<Integer> work_list;
 
     private static void newList(){
         int rndNum;
@@ -16,6 +17,13 @@ public class Program {
         for (int i = 0; i < N; i++) {
             rndNum = a + rnd.nextInt(b);
             list.add(rndNum);
+        }
+    };
+    private static void copyList(){
+        int rndNum;
+        work_list = new MyArrayList<>();
+        for (int i = 0; i < N; i++) {
+            work_list.add(list.get(i));
         }
     };
 
@@ -30,22 +38,23 @@ public class Program {
         for (int i = 0; i < M; i++) {
             System.out.print((i+1)+"     ");
             newList();
+            copyList();
             timeAlg1 = System.currentTimeMillis();
-            list.insertionSort(Integer::compareTo);
+            work_list.insertionSort(Integer::compareTo);
             timeAlg2 = System.currentTimeMillis();
             timeInsert += timeAlg2 - timeAlg1;
             System.out.print(timeAlg2 - timeAlg1 + "     ");
 
-            newList();
+            copyList();
             timeAlg1 = System.currentTimeMillis();
-            list.selectionSort(Integer::compareTo);
+            work_list.selectionSort(Integer::compareTo);
             timeAlg2 = System.currentTimeMillis();
             timeSelect += timeAlg2 - timeAlg1;
             System.out.print(timeAlg2 - timeAlg1 + "     ");
 
-            newList();
+            copyList();
             timeAlg1 = System.currentTimeMillis();
-            list.sortBubble(Integer::compareTo);
+            work_list.sortBubble(Integer::compareTo);
             timeAlg2 = System.currentTimeMillis();
             timeBubble += timeAlg2 - timeAlg1;
             System.out.println(timeAlg2 - timeAlg1);
