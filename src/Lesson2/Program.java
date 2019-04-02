@@ -20,7 +20,6 @@ public class Program {
         }
     };
     private static void copyList(){
-        int rndNum;
         work_list = new MyArrayList<>();
         for (int i = 0; i < N; i++) {
             work_list.add(list.get(i));
