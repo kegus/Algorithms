@@ -2,68 +2,36 @@ package Lesson3;
 
 import java.util.NoSuchElementException;
 
-public class MyArrayQueue<Item> {
-    private Object[] queue = new Object[1];
-    private int size = 0;
+public class MyArrayQueue<Item> extends MyArrayItem<Item> {
     private int start = 0;
     private int end = 0;
 
-    public int size() {
-        return size;
-    }
-
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
     private void resize(int capacity) {
         Object[] tmp = new Object[capacity];
-        for (int i = 0; i < size; i++) {
-            tmp[i] = queue[(start + i) % queue.length];//x % n = [0;n - 1]
-        }
-        queue = tmp;
+        for (int i = 0; i < size; i++) tmp[i] = objArr[(start + i) % objArr.length]; //x % n = [0;n - 1]
+        objArr = tmp;
         start = 0;
         end  = size;
     }
 
     public void enqueue(Item item) {
-        if (size == queue.length) {
-            resize(2 * queue.length);
-        }
-        queue[end++] = item;
-        //if (end == queue.length) {end = 0;}
-        end %= queue.length;
+        if (isFull()) resize(2 * objArr.length);
+        set(item, end++);
+        end %= objArr.length;
         size++;
     }
 
     public Item dequeue() {
-        if (isEmpty()) {
-            throw new NoSuchElementException("Queue is empty");
-        }
-        Item item = (Item) queue[start];
-        queue[start] = null;
+        Item item = peekFront();
         size--;
         start++;
-        start %= queue.length;
-        if (size == queue.length / 4 && size > 0) {
-            resize(queue.length / 2);
-        }
+        start %= objArr.length;
+        if (shouldResize()) resize(objArr.length / 2);
         return item;
     }
 
     public Item peekFront() {
-        if (isEmpty()) {
-            throw new NoSuchElementException("Queue is empty");
-        }
-        return (Item) queue[start];
+        if (isEmpty()) throw new NoSuchElementException("Queue is empty");
+        return get(start);
     }
-
-    /*public String toString() {
-        StringBuilder s = new StringBuilder();
-        for (int i = 0; i < size; i++) {
-            s.append(queue[(start + i) % queue.length] + ", ");
-
-        }
-        return s.toString();
-    }*/
 }

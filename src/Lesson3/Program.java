@@ -2,24 +2,27 @@ package Lesson3;
 
 public class Program {
     public static void main(String[] args) {
-        MyArrayStack<Character> stack = new MyArrayStack<>();
-        stack.push('a');
-        stack.push('c');
-        stack.push('d');
-        stack.push('x');
-        System.out.println(stack.size());
-        System.out.println(stack.isEmpty());
-        System.out.println(stack.peek());
-        System.out.println(stack.pop());
-        System.out.println(stack.peek());
-        stack.push('g');
-        System.out.println(stack.peek());
-        System.out.println(stack);
+//        MyArrayStack<Character> stack = new MyArrayStack<>();
+//        stack.push('a');
+//        stack.push('c');
+//        stack.push('d');
+//        stack.push('x');
+//        System.out.println(stack.size());
+//        System.out.println(stack.isEmpty());
+//        System.out.println(stack.peek());
+//        System.out.println(stack.pop());
+//        System.out.println(stack.pop());
+//        System.out.println(stack.pop());
+////        System.out.println(stack.pop());
+//        System.out.println(stack.peek());
+//        stack.push('g');
+//        System.out.println(stack.peek());
+//        System.out.println(stack);
 
         //(a + 4) * [(b - 7) / {a - 5 * (c + 8)}]
-        Expression e = new Expression("(a + 4) * {[(b - 7) / {a - 5 * (c + 8)}]");
-        System.out.println(e.checkBrackets());
-
+//        Expression e = new Expression("(a + 4) * {[(b - 7) / {a - 5 * (c + 8)}]");
+//        System.out.println(e.checkBrackets());
+//
         MyArrayQueue<Character> queue = new MyArrayQueue<>();
         queue.enqueue('a');
         queue.enqueue('b');
@@ -34,6 +37,7 @@ public class Program {
         queue.dequeue();
         queue.dequeue();
         queue.dequeue();
+//        queue.dequeue();
         System.out.println(queue.size());
         queue.dequeue();
         queue.enqueue('f');
@@ -54,7 +58,7 @@ public class Program {
         //* + 4 5 2 = * 9 2 = 18
         //+ 4 5 - префиксная, польская нотация
         //4 5 + - постфиксная, обратная польская нотация
-        PostfixExpression expr = new PostfixExpression("4 5 + 2 *");
-        System.out.println(expr.calculate());
+//        PostfixExpression expr = new PostfixExpression("4 5 + 2 *");
+//        System.out.println(expr.calculate());
     }
 }

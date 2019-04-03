@@ -1,7 +1,9 @@
 package Lesson3;
 
+import java.util.NoSuchElementException;
+
 public class MyArrayItem<Item> {
-    protected Object[] stack = new Object[1];
+    protected Object[] objArr = new Object[1];
     protected int size = 0;
 
     public int size() {
@@ -9,5 +11,26 @@ public class MyArrayItem<Item> {
     }
     public boolean isEmpty() {
         return size == 0;
+    }
+    public boolean isFull() {
+        return size == objArr.length;
+    }
+    public boolean shouldResize() {
+        return size == objArr.length / 4 && size > 0;
+    }
+    protected Item get(int index){
+        if (index < 0 || index > size - 1) throw new NoSuchElementException(" Index out of bounds");
+        return (Item) objArr[index];
+    }
+    protected void set(Item item, int index){
+        if (index < 0 || index > size + 1) throw new NoSuchElementException(" Index out of bounds");
+        objArr[index] = item;
+    }
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            s.append(objArr[i] + ", ");
+        }
+        return s.toString();
     }
 }
