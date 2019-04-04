@@ -2,7 +2,8 @@ package Lesson3;
 
 public class Program {
     public static void main(String[] args) {
-        // Переворот строки
+        System.out.println("Переворот символов в предложении");
+        // Переворот строки 1
         String str = "Hello, world";
         System.out.println(str);
 
@@ -32,6 +33,39 @@ public class Program {
         }
         System.out.println(sbD);
 
+        System.out.println("Переворот слов в предложении");
+        // Переворот строки 2
+        String str2 = "My Dear Konstantin How are you";
+        System.out.println(str2);
+        String[] tmp_arr = str2.split(" ");
+
+        // при помощи стека
+        MyArrayStack<String> revertString2 = new MyArrayStack<>();
+        for (int i = 0; i < tmp_arr.length; i++) {
+            String s = tmp_arr[i];
+            revertString2.push(s);
+        }
+        StringBuilder sb2 = new StringBuilder();
+        while (!revertString2.isEmpty()) {
+            String s = revertString2.pop();
+            sb2.append(s+" ");
+        }
+        System.out.println(sb2);
+
+        // при помощи дека
+        MyArrayDeque<String> revertStringD2 = new MyArrayDeque<>();
+        for (int i = 0; i < tmp_arr.length; i++) {
+            String s = tmp_arr[i];
+            revertStringD2.insertRight(s);
+        }
+        StringBuilder sbD2 = new StringBuilder();
+        while (!revertStringD2.isEmpty()) {
+            String s = revertStringD2.removeRight();
+            sbD2.append(s+" ");
+        }
+        System.out.println(sbD2);
+
+        System.out.println("MyArrayDeque");
         // MyArrayDeque
         MyArrayDeque<String> deque = new MyArrayDeque<>();
         deque.insertLeft("Dear");
