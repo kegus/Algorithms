@@ -15,15 +15,15 @@ public class MyArrayItem<Item> {
     public boolean isFull() {
         return size == objArr.length;
     }
-    public boolean shouldResize() {
+    protected boolean shouldResize() {
         return size == objArr.length / 4 && size > 0;
     }
     protected Item get(int index){
-        if (index < 0 || index > size - 1) throw new NoSuchElementException(" Index out of bounds");
+        if (index < 0 || index > objArr.length - 1) throw new NoSuchElementException(" Index out of bounds");
         return (Item) objArr[index];
     }
     protected void set(Item item, int index){
-        if (index < 0 || index > size + 1) throw new NoSuchElementException(" Index out of bounds");
+        if (index < 0 || index > objArr.length - 1) throw new NoSuchElementException(" Index out of bounds");
         objArr[index] = item;
     }
     public String toString() {
