@@ -26,11 +26,4 @@ public class MyArrayItem<Item> {
         if (index < 0 || index > objArr.length - 1) throw new NoSuchElementException(" Index out of bounds");
         objArr[index] = item;
     }
-    public String toString() {
-        StringBuilder s = new StringBuilder();
-        for (int i = 0; i < size; i++) {
-            s.append(objArr[i] + ", ");
-        }
-        return s.toString();
-    }
 }

@@ -46,6 +46,7 @@ public class MyArrayDeque<Item> extends MyArrayItem<Item> {
         left %= objArr.length;
         return item;
     }
+
     public Item removeRight(){
         Item item = peekRight();
         size--;
@@ -54,16 +55,17 @@ public class MyArrayDeque<Item> extends MyArrayItem<Item> {
         if (right < 0) right = objArr.length-1;
         return item;
     }
+
     public Item peekLeft(){
         if (isEmpty()) throw new NoSuchElementException("Deque is empty");
         return get(left);
     }
+
     public Item peekRight(){
         if (isEmpty()) throw new NoSuchElementException("Deque is empty");
         return get(right);
     }
 
-    @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
         if (left < 0 || right < 0 || isEmpty() ) s.append("Empty deque"); else

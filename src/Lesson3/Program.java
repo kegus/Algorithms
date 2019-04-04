@@ -3,11 +3,11 @@ package Lesson3;
 public class Program {
     public static void main(String[] args) {
         // Переворот строки
-        MyArrayStack<Character> revertString = new MyArrayStack<>();
         String str = "Hello, world";
         System.out.println(str);
 
         // при помощи стека
+        MyArrayStack<Character> revertString = new MyArrayStack<>();
         for (int i = 0; i < str.length(); i++) {
             Character c = str.charAt(i);
             revertString.push(c);
@@ -34,17 +34,19 @@ public class Program {
 
         // MyArrayDeque
         MyArrayDeque<String> deque = new MyArrayDeque<>();
-        deque.insertLeft("Konstantin");
         deque.insertLeft("Dear");
         deque.insertRight("hello");
+        deque.insertRight("Konstantin");
         deque.insertRight(". How are you");
         deque.insertLeft("My");
         System.out.println(deque);
         System.out.println(deque.removeLeft());
+        System.out.println(deque.peekLeft());
         System.out.println(deque);
-        System.out.println(deque.removeRight());
+        System.out.println(deque.removeLeft());
         System.out.println(deque.removeRight());
         System.out.println(deque.removeLeft());
+        System.out.println(deque.peekLeft());
         System.out.println(deque.removeRight());
         System.out.println(deque);
         deque.insertLeft("My");

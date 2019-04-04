@@ -34,4 +34,12 @@ public class MyArrayQueue<Item> extends MyArrayItem<Item> {
         if (isEmpty()) throw new NoSuchElementException("Queue is empty");
         return get(start);
     }
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (int i = 0; i < size; i++) {
+            s.append(objArr[(start + i) % objArr.length] + ", ");
+
+        }
+        return s.toString();
+    }
 }
