@@ -2,6 +2,37 @@ package Lesson3;
 
 public class Program {
     public static void main(String[] args) {
+        // Переворот строки
+        MyArrayStack<Character> revertString = new MyArrayStack<>();
+        String str = "Hello, world";
+        System.out.println(str);
+
+        // при помощи стека
+        for (int i = 0; i < str.length(); i++) {
+            Character c = str.charAt(i);
+            revertString.push(c);
+        }
+        StringBuilder sb = new StringBuilder();
+        while (!revertString.isEmpty()) {
+            Character c = revertString.pop();
+            sb.append(c);
+        }
+        System.out.println(sb);
+
+        // при помощи дека
+        MyArrayDeque<Character> revertStringD = new MyArrayDeque<>();
+        for (int i = 0; i < str.length(); i++) {
+            Character c = str.charAt(i);
+            revertStringD.insertRight(c);
+        }
+        StringBuilder sbD = new StringBuilder();
+        while (!revertStringD.isEmpty()) {
+            Character c = revertStringD.removeRight();
+            sbD.append(c);
+        }
+        System.out.println(sbD);
+
+        // MyArrayDeque
         MyArrayDeque<String> deque = new MyArrayDeque<>();
         deque.insertLeft("Konstantin");
         deque.insertLeft("Dear");

@@ -13,14 +13,14 @@ public class MyArrayDeque<Item> extends MyArrayItem<Item> {
         if (left < 0 || right < 0); else {
             for (int i = 0; i < size; i++) tmp[i] = objArr[(left + i) % objArr.length]; //x % n = [0;n - 1]
             left = 0;
-            right = size - 2 < 0 ? 0 : size - 2;
+            right = size - 1 < 0 ? 0 : size - 1;
         }
         objArr = tmp;
     }
 
     public void insertLeft(Item item) {
-        size++;
         if (isFull()) resize(2 * objArr.length);
+        size++;
         if (left < 0) {
             left = 0;
             right = 0;
@@ -29,8 +29,8 @@ public class MyArrayDeque<Item> extends MyArrayItem<Item> {
     }
 
     public void insertRight(Item item) {
-        size++;
         if (isFull()) resize(2 * objArr.length);
+        size++;
         if (right < 0) {
             left = 0;
             right = 0;
