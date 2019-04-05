@@ -3,7 +3,7 @@ package Lesson2;
 import java.util.Comparator;
 import java.util.Iterator;
 
-public class MyArrayList<Item> /*implements Iterable<Item>*/ {
+public class MyArrayList<Item> implements Iterable<Item> {
     private Object[] list = new Object[1];
     private int size = 0;
 
@@ -78,34 +78,31 @@ public class MyArrayList<Item> /*implements Iterable<Item>*/ {
         return s.toString();
     }
 
-//    private class MyArrayListIterator implements Iterator<Item> {
-//
-//        private int cursor = 0;
-//
-//        @Override
-//        public boolean hasNext() {
-//            return cursor != size;
-//        }
-//
-//        @Override
-//        public Item next() {
-//            if (!hasNext()) {
-//                throw new IndexOutOfBoundsException();
-//            }
-//            Item item = (Item) list[cursor];
-//            cursor++;
-//            return item;
-//        }
-//    }
-//
-//    @Override
-//    public Iterator<Item> iterator() {
-//        return new MyArrayListIterator();
-//    }
-//    @Override
-//    public Iterator<Item> iterator() {
-//        return null;
-//    }
+    private class MyArrayListIterator implements Iterator<Item> {
+
+        private int cursor = 0;
+
+        @Override
+        public boolean hasNext() {
+            return cursor != size;
+        }
+
+        @Override
+        public Item next() {
+            if (!hasNext()) {
+                throw new IndexOutOfBoundsException();
+            }
+            Item item = (Item) list[cursor];
+            cursor++;
+            return item;
+        }
+    }
+
+    @Override
+    public Iterator<Item> iterator() {
+        return new MyArrayListIterator();
+    }
+
     private boolean binarySearch(Item item, Comparator<Item> cmp) {
         int low = 0;
         int high = size - 1;
@@ -146,7 +143,6 @@ public class MyArrayList<Item> /*implements Iterable<Item>*/ {
         }
     }
     public void sortBubble(Comparator<Item> cmp){
-        //int out, in;
         for (int i = size - 1; i >= 1; i--) {
             for(int j = 0; j < i; j++) {
                 if (less((Item)list[j+1], (Item)list[j], cmp)) {

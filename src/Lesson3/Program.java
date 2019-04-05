@@ -1,5 +1,14 @@
 package Lesson3;
 
+//import java.util.ArrayDeque;
+////// standart ArrayDeque
+////        ArrayDeque<String> tmp = new ArrayDeque<>();
+////        tmp.add("Hello");
+////        tmp.addLast("Konstantin");
+////        tmp.addFirst("Dear");
+////        tmp.addFirst("My");
+//System.out.println(tmp);
+
 public class Program {
     public static void main(String[] args) {
         System.out.println("Переворот символов в предложении");
