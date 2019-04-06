@@ -2,17 +2,24 @@ package Lesson4;
 
 public class Program {
     public static void main(String[] args) {
+
         // Iterator
         MyLinkedList<Character> linkedList = new MyLinkedList<>();
         linkedList.addLast('a');
         linkedList.addLast('b');
         linkedList.addLast('c');
-        linkedList.set(1, 'd');
         linkedList.addFirst('e');
         linkedList.addLast('g');
         linkedList.add(2, 'f');
+        linkedList.set(4, 'd');
         //System.out.println(linkedList);
         for (Character c:linkedList) { System.out.print(c + ", "); }
+        System.out.println();
+        System.out.println(linkedList.get(1));
+        System.out.println(linkedList.get(3));
+        linkedList.delete(4);
+        System.out.println(linkedList);
+
 
 //        // MyLinkedStack
 //        MyLinkedStack<Character> stack = new MyLinkedStack<>();

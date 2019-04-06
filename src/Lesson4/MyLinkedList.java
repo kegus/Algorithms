@@ -121,31 +121,34 @@ public class MyLinkedList<Item> implements Iterable<Item> {
         return item;
     }
 
+    private Node getNodeByIndex(int index) {
+        int currentIndex;
+        Node current = null;
+        if (index > size / 2) {
+            currentIndex = size - 1;
+            current = last;
+            while (currentIndex > index) {
+                current = current.previous;
+                currentIndex--;
+            }
+        } else {
+            currentIndex = 0;
+            current = first;
+            while (currentIndex < index) {
+                current = current.next;
+                currentIndex++;
+            }
+        }
+        return current;
+    }
     public Item get(int index) {
-        if (index < 0 || index > size - 1) {
-            throw new IndexOutOfBoundsException();
-        }
-        int currentIndex = 0;
-        Node current = first;
-        while (currentIndex < index) {
-            current = current.next;
-            currentIndex++;
-        }
-        return current.item;
+        if (index < 0 || index > size - 1) throw new IndexOutOfBoundsException();
+        return getNodeByIndex(index).item;
     }
 
     public void set(int index, Item item) {
-        if (index < 0 || index > size - 1) {
-            throw new IndexOutOfBoundsException();
-        }
-
-        int currentIndex = 0;
-        Node current = first;
-        while (currentIndex < index) {
-            current = current.next;
-            currentIndex++;
-        }
-        current.item = item;
+        if (index < 0 || index > size - 1)  throw new IndexOutOfBoundsException();
+        getNodeByIndex(index).item = item;
     }
 
     public int indexOf(Item item) {
@@ -198,18 +201,34 @@ public class MyLinkedList<Item> implements Iterable<Item> {
             addLast(item);
             return;
         }
-
-        Node current = first;
-        int currentIndex = 0;
-        while (currentIndex < index) {
-            current = current.next;
-            currentIndex++;
-        }
+        Node current = getNodeByIndex(index);
         Node newNode = new Node(current.previous, item, current);
         Node previous = current.previous;
         previous.next = newNode;
         current.previous = newNode;
         size++;
+    }
+
+    public void delete(int index) {
+        if (index < 0 || index > size - 1) {
+            throw new IndexOutOfBoundsException();
+        }
+        if (index == 0) {
+            removeFirst();
+            return;
+        }
+        if (index == size - 1) {
+            removeLast();
+            return;
+        }
+        Node current = getNodeByIndex(index);
+        Node previous = current.previous;
+        Node next = current.next;
+        previous.next = next;
+        next.previous = previous;
+        size--;
+        current.next = null;
+        current.previous = null;
     }
 
     public String toString() {
