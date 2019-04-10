@@ -2,8 +2,36 @@ package Lesson5;
 
 public class Program {
     public static void main(String[] args) {
-        System.out.println(productRec(7, 8));
+        System.out.println(powRec(2, 8));
     }
+    //ДЗ
+    //1. Написать программу по возведению числа в степень с помощью рекурсии.
+    //a^n = [a * a * ... * a] * a = a^(n -1) * a;
+    //f(a, n) = f(a, n - 1) * a
+
+    public  static long powRec2(int value, int power) {
+        long res;
+        if (power == 0) return 1;
+        else if (power % 2 == 0) {
+            res = powRec2(value, power / 2);
+            return res * res;
+        } else return powRec(value, power);
+    }
+    public static long powRec(int value, int power) {
+        if (power == 0) return 1;
+        else if (power == 1) return value;
+        else if (power % 2 == 0) return powRec2(value, power);
+        else return powRec(value, power - 1) * value;
+    }
+
+    public static long pow(int value, int power) {
+        long result = 1;
+        for (int i = 0; i < power; i++) result *= value;
+        return result;
+    }
+
+
+
     //5. Даны два целых неотрицательных числа a и b.
     //Без использования операции умножения найти произведение чисел a и b
     //a * b = [a + a + ... + a] + a = a * (b - 1) + a
