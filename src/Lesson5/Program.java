@@ -1,10 +1,32 @@
 package Lesson5;
 
+import Lesson4.MyLinkedStack;
+
+import java.sql.Array;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+
 public class Program {
     public static void main(String[] args) {
-        System.out.println(powRec(2, 8));
+        // Оптимизация рекурсии фибоначи с помощью массива
+        // и сравнение с циклом
+        long res;
+
+        System.out.println("Новая рекурсия");
+        res = phiboNew(1770);
+        System.out.println(res);
+        //System.out.println(Arrays.toString(cache));
+
+        System.out.println();
+        System.out.println("Цикл");
+        res = phibo(1770);
+        System.out.println(res);
     }
+
     //ДЗ
+
+
+
     //1. Написать программу по возведению числа в степень с помощью рекурсии.
     //a^n = [a * a * ... * a] * a = a^(n -1) * a;
     //f(a, n) = f(a, n - 1) * a
@@ -136,15 +158,30 @@ public class Program {
     //1, 1, 2, 3, 5, 8, 13, 21, 34, 55 ...
     //f(n)/f(n - 1) = fi = 1.618
     //a(n) = a(n - 1) + d
-    public static long phiboRec(int n) {
-        System.out.print(n + " ");
-        if (n == 1 || n == 2) {
-            return 1;
-        }
-        else {
-            return phiboRec(n - 1) + phiboRec(n - 2);
-        }
+
+    private static Long[] cache;
+
+    public static Long phiboNew(int n) {
+        cache = new Long[n];
+        if (n > 0) cache[0] = 1L;
+        if (n > 1) cache[1] = 1L;
+        return phiboRec(n);
     }
+
+    public static long phiboRec(int n) {
+        if (cache[n-1] == null) cache[n-1] = phiboRec(n - 1) + phiboRec(n - 2);
+        return cache[n-1];
+    }
+
+//    public static long phiboRec(int n) {
+//        System.out.print(n + " ");
+//        if (n == 1 || n == 2) {
+//            return 1;
+//        }
+//        else {
+//            return phiboRec(n - 1) + phiboRec(n - 2);
+//        }
+//    }
 
     public static long phibo(int n) {
         long current = 1;
