@@ -1,31 +1,34 @@
 package Lesson5;
 
-import Lesson4.MyLinkedStack;
-
-import java.sql.Array;
-import java.util.ArrayDeque;
-import java.util.Arrays;
-
 public class Program {
     public static void main(String[] args) {
+        //ДЗ
+        // Ханойские башни рекурсия
+        makeTowersRec(3, 1, 2, 3);
+        // Ханойские башни цикл
+        makeTowers(3);
+
+        //Возведение в степень
+        System.out.println("Возведение в степень Цикл");
+        System.out.println(pow(7,8));
+        System.out.println("Возведение в степень рекурсия");
+        System.out.println(powRec(7,8));
+
         // Оптимизация рекурсии фибоначи с помощью массива
         // и сравнение с циклом
         long res;
-
-        System.out.println("Новая рекурсия");
+        System.out.println("Фибоначчи Новая рекурсия");
         res = phiboNew(1770);
         System.out.println(res);
         //System.out.println(Arrays.toString(cache));
 
         System.out.println();
-        System.out.println("Цикл");
+        System.out.println("Фибоначчи Цикл");
         res = phibo(1770);
         System.out.println(res);
     }
 
     //ДЗ
-
-
 
     //1. Написать программу по возведению числа в степень с помощью рекурсии.
     //a^n = [a * a * ... * a] * a = a^(n -1) * a;
@@ -52,8 +55,35 @@ public class Program {
         return result;
     }
 
+    //2. Ханойские башни
+    public static void makeTowersRec(int top, int from, int middle, int to) {
+        if (top == 1) System.out.println("Диск 1 перемещён с башни " + from + " на башню " + to);
+        else {
+            makeTowersRec(top - 1, from, to, middle);
+            System.out.println("Диск " + top + " перемещён с башни " + from + " на башню " + to);
+            makeTowersRec(top - 1, middle, from, to);
+        }
+    }
 
+    public static void makeTowers(int numDiscs) {
+        long numMoves = powRec(2, numDiscs) - 1;
+        int[] towers = { 1, 2, 3, 1, 3, 2 };
+        int count = 0;
 
+        for (int currMove = 1; currMove <= numMoves; currMove++) {
+            int disc = 0;
+            while ( (currMove >> disc & 1) == 0 ) {
+                disc++;
+            }
+            int level = (numDiscs - disc) & 1;
+            int from = (currMove >> ++disc) % 3;
+            from = towers[from + (level * 3)];
+            int to = (from + level) % 3 + 1 ;
+            System.out.println (++count + ". Диск " + disc + " перемещён с башни " + from  + " на башню " + to) ;
+        }
+    }
+
+    // Урок
     //5. Даны два целых неотрицательных числа a и b.
     //Без использования операции умножения найти произведение чисел a и b
     //a * b = [a + a + ... + a] + a = a * (b - 1) + a
