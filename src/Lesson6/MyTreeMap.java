@@ -6,13 +6,20 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
     private class Node {
         Key key;
         Value value;
+        Node parent;
         Node left;
         Node right;
-        int size; //кол-воо узлов в дереве, корнем которого является данный узел
+        int size; //кол-во узлов в дереве, корнем которого является данный узел
+        int height; //кол-во узлов в дереве до данного узла
         public Node(Key key, Value value, int size) {
             this.size = size;
             this.value = value;
             this.key = key;
+            height = 0;
+        }
+        void setParent(Node parent) {
+            this.parent = parent;
+            height = height(parent) + 1;
         }
     }
 
@@ -31,6 +38,48 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
 
     public int size() {
         return size(root);
+    }
+
+    public boolean isBalanced() {
+        return isBalanced(root);
+    }
+
+    private boolean isBalanced(Node node) {
+        if (node == null) return true;
+        if (Math.abs(height(node.left) - height(node.right)) > 1) return false;
+        return isBalanced(node.left) && isBalanced(node.right);
+    }
+
+    public int height(Node node) {
+        if (node == null) {
+            return -1;
+        }
+        else {
+            return node.height;
+        }
+    }
+
+    public int getHeight(Key key) {
+        return getHeight(key, root);
+    }
+
+    private int getHeight(Key key, Node node)  {
+        if (key == null) {
+            throw new IllegalArgumentException("Не может быть ключа со значением Null");
+        }
+        if (node == null) {
+            return -1;
+        }
+        int cmp = key.compareTo(node.key);
+        if (cmp == 0) {
+            return height(node);
+        }
+        if (cmp < 0) {
+            return getHeight(key, node.left);
+        }
+        else { //cmp > 0
+            return getHeight(key, node.right);
+        }
     }
 
     public Value get(Key key) { //a[key]
@@ -82,12 +131,15 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
         }
         if (cmp < 0) {
             node.left = put(key, value, node.left);
+            node.left.setParent(node);
         }
         else { //cmp > 0
             node.right = put(key, value, node.right);
+            node.right.setParent(node);
         }
 
         node.size = size(node.left) + size(node.right) + 1;
+
         return node;
     }
 
