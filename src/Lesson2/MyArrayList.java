@@ -103,8 +103,9 @@ public class MyArrayList<Item> implements Iterable<Item> {
         return new MyArrayListIterator();
     }
 
-    private boolean binarySearch(Item item, Comparator<Item> cmp) {
-        int low = 0;
+    public boolean binarySearch(Item item, Comparator<Item> cmp) {
+        return binarySearch(item, 0, size - 1, cmp);
+        /*int low = 0;
         int high = size - 1;
         while (low <= high) {
             int mid = low + (high - low) / 2;
@@ -113,7 +114,23 @@ public class MyArrayList<Item> implements Iterable<Item> {
             else if (res > 0) low = mid + 1;
             else return true;
         }
-        return false;
+        return false;*/
+    }
+
+    private boolean binarySearch(Item item, int low, int high, Comparator<Item> cmp) {
+        if (low > high) {
+            return false;
+        }
+        int mid = low + (high - low) / 2;
+        if (cmp.compare(item, (Item) list[mid]) == 0) {
+            return true;
+        }
+        if (cmp.compare(item, (Item) list[mid]) > 0) {
+            return binarySearch(item, mid + 1, high, cmp);
+        }
+        else {
+            return binarySearch(item, low, mid - 1, cmp);
+        }
     }
 
     private boolean less(Item item1, Item item2, Comparator<Item> cmp) { return cmp.compare(item1, item2) < 0; }
