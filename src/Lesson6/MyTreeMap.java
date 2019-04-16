@@ -41,18 +41,34 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
     }
 
     public boolean isBalanced() {
-        return isBalanced(root);
+        return maxHeight(root) - minHeight(root) < 2;
     }
 
-    private boolean isBalanced(Node node) {
-        if (node == null) return true;
-        if (Math.abs(height(node.left) - height(node.right)) > 1) return false;
-        return isBalanced(node.left) && isBalanced(node.right);
+    public int minHeight() {
+        return minHeight(root);
+    }
+
+    private int minHeight(Node node) {
+        if (node == null) return 0;
+        if (node.left == null || node.right == null) return node.height;
+        return Math.min(minHeight(node.left), minHeight(node.right));
+    }
+
+    public int maxHeight() {
+        return maxHeight(root);
+    }
+
+    private int maxHeight(Node node) {
+        if (node == null) return 0;
+        if (node.left == null && node.right == null) return node.height;
+        if (node.left != null && node.right != null) return Math.max(maxHeight(node.left), maxHeight(node.right));
+        if (node.left == null) return maxHeight(node.right);
+        else return maxHeight(node.left);
     }
 
     public int height(Node node) {
         if (node == null) {
-            return -1;
+            return 0;
         }
         else {
             return node.height;
@@ -171,6 +187,7 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
         }
         else {
             node.left = removeMin(node.left);
+            node.left.setParent(node);
         }
         node.size = size(node.left) + size(node.right) + 1;
         return node;
@@ -189,6 +206,7 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
         }
         else {
             node.right = removeMin(node.right);
+            node.right.setParent(node);
         }
         node.size = size(node.left) + size(node.right) + 1;
         return node;
@@ -202,7 +220,7 @@ public class MyTreeMap<Key extends Comparable<Key>, Value> {
     }
 
     public void remove(Key key) {
-
+        remove(key, root);
     }
 
     private Node remove(Key key, Node node) {
