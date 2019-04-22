@@ -1,6 +1,9 @@
 package Lesson8;
 
+import java.util.TreeMap;
+
 public class MyLinearProbbingHashMap<Key, Value> {
+    TreeMap tm;
     private int M = 97;
     private int size = 0;
     private Object[] keys = new Object[M];

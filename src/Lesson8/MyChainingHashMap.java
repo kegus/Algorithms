@@ -30,7 +30,7 @@ public class MyChainingHashMap<Key, Value> {
 
     public Value get(Key key) { //a[key]
         if (key == null) {
-            throw new IllegalArgumentException("Ключ не может равняться null");
+            throw new IllegalArgumentException("РљР»СЋС‡ РЅРµ РјРѕР¶РµС‚ СЂР°РІРЅСЏС‚СЊСЃСЏ null");
         }
         int i = hash(key);
         Node x = (Node) st[i];
@@ -49,7 +49,7 @@ public class MyChainingHashMap<Key, Value> {
 
     public void put(Key key, Value value) { //a[key] = value
         if (key == null) {
-            throw new IllegalArgumentException("Ключ не может равняться null");
+            throw new IllegalArgumentException("РљР»СЋС‡ РЅРµ РјРѕР¶РµС‚ СЂР°РІРЅСЏС‚СЊСЃСЏ null");
         }
         int i = hash(key);
         Node x = (Node) st[i];
