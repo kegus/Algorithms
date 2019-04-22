@@ -94,6 +94,14 @@ public class Knapsacks {
         return res;
     }
 
+    public Goods[] getItems(){
+        Goods[] res = new Goods[countItems()];
+        for (int i = 0, j = 0; i < knapsack.length; i++) {
+            if (items[i]) res[j++] = knapsack[i];
+        }
+        return res;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
