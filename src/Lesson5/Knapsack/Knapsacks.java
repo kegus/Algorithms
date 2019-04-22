@@ -9,19 +9,20 @@ public class Knapsacks {
     public Boolean[] items;
     private Goods[] knapsack;
     private int countAll = 0;
+    public int tmCount = 0;
 
     private class ItemsComparator implements Comparator<Boolean[]> {
         @Override
         public int compare(Boolean[] o1, Boolean[] o2) {
             for (int i = 0; i < o1.length; i++) {
-                if (o1[i] && ! o2[i]) return i;
-                else if (!o1[i] && o2[i]) return -i;
+                if (o1[i] && ! o2[i]) return i+1;
+                else if (!o1[i] && o2[i]) return -i-1;
             }
             return 0;
         }
     }
 
-    private MyTreeHashMap<Boolean[], Goods[]> tm = new MyTreeHashMap(new ItemsComparator());
+    public MyTreeHashMap<Boolean[], Goods[]> tm = new MyTreeHashMap(new ItemsComparator());
 
     public Knapsacks(Goods[] knapsack) {
         this.knapsack = knapsack;
@@ -49,22 +50,27 @@ public class Knapsacks {
         return res;
     }
 
-    public void throw_one() {
+    private void saveKnapsack(){
+        tmCount++;
         int cntItems = countItems();
+        Boolean[] tmp_items = new Boolean[countAll];
         Goods[] tmp_knapsack = new Goods[cntItems];
-        int i = 0;
-        int j = 0;
+        int i = 0, j = 0;
         while (i < countAll) {
             if (items[i]) {
                 tmp_knapsack[j] = knapsack[i];
                 j++;
             }
+            tmp_items[i] = items[i];
             i++;
         }
-        tm.put(items, tmp_knapsack);
+        tm.put(tmp_items, tmp_knapsack);
+    }
 
+    public void throw_one() {
+        saveKnapsack();
         boolean tmp;
-        i = items.length-1;
+        int i = items.length-1;
         while (true) {
             tmp = items[i];
             items[i] = !items[i];
