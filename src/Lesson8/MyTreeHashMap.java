@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.TreeMap;
 
 public class MyTreeHashMap<Key, Value> {
-    private int M = 7;
+    private int M = 1024*1024;
     private int size = 0;
     private Object[] st = new Object[M];
     private Comparator<Key> cmp;
