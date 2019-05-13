@@ -1,10 +1,14 @@
 package Lesson8;
 
+import Lesson5.Knapsack.Goods;
+
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Set;
 import java.util.TreeMap;
 
 public class MyTreeHashMap<Key, Value> {
-    private int M = 7;
+    private int M = 24;
     private int size = 0;
     private Object[] st = new Object[M];
     private Comparator<Key> cmp;
@@ -44,8 +48,26 @@ public class MyTreeHashMap<Key, Value> {
         }
         int i = hash(key);
         if (st[i] == null) st[i] = new TreeMap<Key, Value>(cmp);
+        //Goods[] b = (Goods[])((TreeMap)st[i]).get(key);
         ((TreeMap)st[i]).put(key, value);
         size++;
         return;
+    }
+
+    @Override
+    public String toString() {
+        int j = 0;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < M; i++) {
+            if (st[i] != null) {
+                //sb.append(Arrays.toString((Boolean[])((TreeMap)st[i]).firstKey())+ " ");
+                Set<Boolean[]> s = ((TreeMap)st[i]).keySet();
+                for (Boolean[] b: s) {
+                    j++;
+                    sb.append(j+". "+Arrays.toString(b) + " \n");
+                }
+            }
+        }
+        return "MyTreeHashMap{} \n"+sb;
     }
 }
